@@ -37,7 +37,7 @@ python manage.py setup_google_oauth
 Daftar email anggota diatur lewat env:
 
 ```env
-GROUP_MEMBER_EMAILS=anggota1@gmail.com,anggota2@gmail.com,anggota3@gmail.com
+GROUP_MEMBER_EMAILS=abinaufal901@gmail.com, dionwisdom29@gmail.com, m.alyhaidarulloh@gmail.com, alvino0706@gmail.com, haikalmuzaki28@gmail.com
 ```
 
 Akun harus memenuhi dua syarat untuk mengubah tema:
