@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Tim Bjorka{% endblock %}
+
+{% block content %}
+<style>
+  .title {
+    margin: 2px 0 0;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.06;
+    letter-spacing: .15px;
+    color: var(--ink);
+  }
+
+  .subtitle {
+    margin: 10px 0 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .member-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .member-card {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 13px;
+    background: var(--paper-2);
+    transition: .18s ease;
+  }
+
+  .member-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--primary) 28%, var(--line));
+  }
+
+  .member-name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .member-info {
+    margin: 6px 0 0;
+    color: var(--ink-soft);
+    font-size: .9rem;
+  }
+
+  .edit-hint {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: .88rem;
+  }
+
+  @media (max-width: 760px) {
+    .member-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<h1 class="title">{{ profile.group_name }}</h1>
+<p class="subtitle">Daftar anggota kelompok.</p>
+
+<section class="member-grid">
+  {% for member in member_cards %}
+    <article class="member-card">
+      <h2 class="member-name">{{ member.name }}</h2>
+      {% if member.npm %}
+        <p class="member-info">NPM: {{ member.npm }}</p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>
+
+{% if can_edit_site %}
+  <p class="edit-hint">Akses edit aktif. Gunakan tombol <strong>Edit Tampilan</strong> di header.</p>
+{% endif %}
+{% endblock %}

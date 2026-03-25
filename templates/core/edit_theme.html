@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Tampilan • Tim Bjorka{% endblock %}
+
+{% block content %}
+<style>
+  .edit-wrap {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 15px;
+    background: var(--paper-2);
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.95rem;
+    line-height: 1.08;
+    color: var(--ink);
+  }
+
+  .sub {
+    margin: 8px 0 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .preview {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: var(--paper);
+  }
+
+  .preview h4 {
+    margin: 0 0 7px;
+    color: var(--ink);
+    font-size: 1.2rem;
+  }
+
+  .preview p { margin: 0; color: var(--ink-soft); }
+
+  .hint { margin: 0 0 10px; color: var(--muted); font-size: .85rem; }
+
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+
+  @media (max-width: 760px) {
+    .title { font-size: 1.65rem; }
+  }
+</style>
+
+<section class="edit-wrap">
+  <h1 class="title">Edit Tampilan Website</h1>
+  <p class="sub">Perubahan berlaku global untuk semua pengunjung.</p>
+
+  <div class="preview">
+    <h4>Tema Aktif</h4>
+    <p>Preset: {{ site_theme.get_theme_preset_display }} | Font: {{ site_theme.get_font_family_display }}</p>
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="id_theme_preset">Tema Website</label>
+    {{ form.theme_preset }}
+    <p class="hint">Pilih preset tema untuk mengganti warna seluruh halaman.</p>
+
+    <label for="id_font_family">Font</label>
+    {{ form.font_family }}
+    <p class="hint">Font akan diterapkan ke semua teks di website.</p>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-main">Simpan Tema</button>
+      <a href="{% url 'home' %}" class="btn btn-soft">Kembali</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
