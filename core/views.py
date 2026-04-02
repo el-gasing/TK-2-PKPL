@@ -19,6 +19,13 @@ DEFAULT_MEMBERS = [
     "Dion Wisdom Pasaribu (2406414536)",
 ]
 
+MEMBER_PHOTOS = {
+    "Mohammad Aly Haidarulloh": "images/aly.jpg",
+    "M Naufal Zhafran Rabiul Batara": "images/biul.jpg",
+    "Alvino Revaldi": "images/vino.jpg",
+    "Haikal Muzaki": "images/zaki.jpg",
+    "Dion Wisdom Pasaribu": "images/dion.jpg",
+}
 
 def _member_cards(raw_members: str):
     cards = []
@@ -28,7 +35,12 @@ def _member_cards(raw_members: str):
             continue
         match = re.match(r"^(.*?)\s*\((\d+)\)\s*$", row)
         if match:
-            cards.append({"name": match.group(1).strip(), "npm": match.group(2).strip()})
+            name = match.group(1).strip()
+            cards.append({
+                "name": name,
+                "npm": match.group(2).strip(),
+                "photo": MEMBER_PHOTOS.get(name, "images/members/default.jpg"),
+            })
         else:
             cards.append({"name": row, "npm": ""})
     return cards
@@ -84,3 +96,5 @@ def edit_theme(request):
         form = ThemeForm(instance=theme)
 
     return render(request, "core/edit_theme.html", {"form": form})
+
+

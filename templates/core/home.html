@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Tim Bjorka{% endblock %}
 
@@ -51,6 +52,14 @@
     font-size: .9rem;
   }
 
+  .member-photo {
+    width:64px; 
+    height:64px; 
+    border-radius:50%; 
+    object-fit:cover; 
+    margin-bottom:10px;
+  }
+
   .edit-hint {
     margin-top: 14px;
     color: var(--muted);
@@ -68,6 +77,11 @@
 <section class="member-grid">
   {% for member in member_cards %}
     <article class="member-card">
+      <img
+        src="{% static member.photo %}"
+        alt="{{ member.name }}"
+        class="member-photo"
+      >
       <h2 class="member-name">{{ member.name }}</h2>
       {% if member.npm %}
         <p class="member-info">NPM: {{ member.npm }}</p>
