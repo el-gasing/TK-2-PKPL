@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Daftar Buku</h1>
+<a href="{% url 'buku_create' %}">Tambah Buku</a>
+<ul>
+    {% for buku in bukus %}
+    <li>
+        {{ buku.judul }} oleh {{ buku.penulis }}
+        <a href="{% url 'buku_update' buku.pk %}">Edit</a>
+        <a href="{% url 'buku_delete' buku.pk %}">Hapus</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
